@@ -37,7 +37,7 @@ transition: 0.2s
 `
 const ClientItem = ({clientData, editOpened}) => {
     const {id, name, town, phone, email, objects} = clientData;
-    const onObjects = objects.map(object => object.status === "действует")
+    const onObjects = objects.filter(object => object.status === "действует")
  return (
      <ClientWrap>
          <EditButton onClick={() => editOpened()}>Редактировать</EditButton>

@@ -5,7 +5,7 @@
               "name":"Иванов Виктор Васильевич",
               "phone":"+8959 444 33 22",
               "email":"ivanovVictor@mail.ru",
-              "town":"Moscow",
+              "town":"Москва",
               "objects":[
                 {
                   "type":"авто",
@@ -61,6 +61,39 @@
                   "services":{
                     "name":"датчик дыма",
                     "startDate":"11.06.13",
+                    "activity":"услуга включена"
+                  }
+                }
+              ]
+            },
+            {
+              "id": 3,
+              "name":"Дроздов Николай Александрович",
+              "phone":"+6765 552 17 77",
+              "email":"drozdovNik@gmail.com",
+              "town":"Казань",
+              "objects":[
+                {
+                  "type":"авто",
+                  "contractNumber":"67321652",
+                  "status":"не действует",
+                  "startDate":"11.12.12",
+                  "finishDate":"11.06.18",
+                  "services":{
+                    "name":"датчик объема топливного бака",
+                    "startDate":"11.12.12",
+                    "activity":"услуга отключена"
+                  }
+                },
+                {
+                  "type":"недвижимость",
+                  "contractNumber":"123536",
+                  "status":"действует",
+                  "startDate":"03.11.19",
+                  "finishDate":"03.11.29",
+                  "services":{
+                    "name":"охрана",
+                    "startDate":"03.11.19",
                     "activity":"услуга включена"
                   }
                 }
