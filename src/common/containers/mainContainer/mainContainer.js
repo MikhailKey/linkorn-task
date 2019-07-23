@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import ClientItem from '../clientItem';
 import {connect} from 'react-redux';
 import WithInfoService from '../../../features/hoc';
-import {allClientsLoaded} from '../../../features/ducks';
-//import Spinner from '../../components/spinner';
-//import ErrorMessage from '../../components/errorMessage';
+import {allClientsLoaded, allClientsError} from '../../../features/ducks';
+import Spinner from '../../components/spinner';
+import ErrorMessage from '../../components/errorMessage';
 
 const MainWrap = styled.div`
 margin-top: 20px;
@@ -21,9 +21,16 @@ class MainContainer extends Component {
         const {InfoService} = this.props;
         InfoService.getAllClients()
         .then(res => this.props.allClientsLoaded(res))
+        .catch(res => this.props.allTasksError(res))
     }
     render() {
-        const {allClients} = this.props;
+        const {allClients, loading, error} = this.props;
+        if (loading) {
+            return <Spinner/>
+        }
+        if (error) {
+            return <ErrorMessage/>
+        }
     return (
         <MainWrap>
             {
@@ -38,9 +45,12 @@ class MainContainer extends Component {
 const mapStateToProps = (state) => {
     return {
         allClients: state.allClients,
+        loading: state.loading,
+        error: state.error
     }
 }
 const mapDispatchToProps =  {
     allClientsLoaded,
+    allClientsError,
 };
 export default WithInfoService()(connect(mapStateToProps, mapDispatchToProps)(MainContainer))

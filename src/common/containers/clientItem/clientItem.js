@@ -35,6 +35,7 @@ transition: 0.2s
 `
 const ClientItem = ({clientData}) => {
     const {id, name, town, phone, email, objects} = clientData;
+    const onObjects = objects.map(object => object.status === "действует")
  return (
      <ClientWrap>
          <EditButton>Редактировать</EditButton>
@@ -43,7 +44,7 @@ const ClientItem = ({clientData}) => {
         <HFour>Телефон: {phone}</HFour><br/>
         <HFour>e-mail: {email}</HFour><br/>
         <HFour>Город: {town}</HFour><br/>
-        <HFour>Количество объектов: {objects.length}</HFour><br/>
+        <HFour>Количество не отключенных объектов: {onObjects.length}</HFour><br/>
         </ClientWrap>
     
  )

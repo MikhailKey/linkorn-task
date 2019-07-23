@@ -8,7 +8,7 @@ flex-wrap: wrap;
 const SearchLine = styled.input`
 flex-basis: 80%;
 padding-left: 20px;
-border: 1px solid #8360c3;
+border: 1px solid #6dd5ed;
 border-top-left-radius: 5px;
 border-bottom-left-radius: 5px;
 font-size: 16px
@@ -16,7 +16,7 @@ font-size: 16px
 `
 const SearchButton = styled.button`
 flex-basis: 10%;
-background: linear-gradient(90deg,#8360c3, #2ebf91);
+background: linear-gradient(to left, #2193b0, #6dd5ed);
 color: white;
 border: none;
 font-size: 17px
@@ -30,7 +30,7 @@ transition: 0.2s
 `
 const AddButton = styled.button`
 flex-basis: 10%;  
-background: linear-gradient(to right, #feac5e, #c779d0, #4bc0c8);
+background: linear-gradient(to right, #2193b0, #6dd5ed);
 color: white;
 border: none;
 border-top-right-radius: 5px;
