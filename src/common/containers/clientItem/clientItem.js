@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import {connect} from 'react-redux';
+import {editOpened} from '../../../features/ducks';
 const ClientWrap = styled.div`
 margin: 10px 0;
 padding: 10px
@@ -33,12 +35,12 @@ transition: 0.2s
     color: #f5a76e
   }
 `
-const ClientItem = ({clientData}) => {
+const ClientItem = ({clientData, editOpened}) => {
     const {id, name, town, phone, email, objects} = clientData;
     const onObjects = objects.map(object => object.status === "действует")
  return (
      <ClientWrap>
-         <EditButton>Редактировать</EditButton>
+         <EditButton onClick={() => editOpened()}>Редактировать</EditButton>
          <ClientTitle>Клиент №{id}</ClientTitle><br/>
         <HFour>ФИО: {name}</HFour><br/>
         <HFour>Телефон: {phone}</HFour><br/>
@@ -49,5 +51,12 @@ const ClientItem = ({clientData}) => {
     
  )
 }
-
-export default ClientItem
+const mapStateToProps = (state) => {
+  return {
+      isOpened: state.isOpened
+  }
+}
+const mapDispatchToProps =  {
+  editOpened
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ClientItem);

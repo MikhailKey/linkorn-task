@@ -1,5 +1,7 @@
-import React from 'react'
+import React, {Component} from 'react'
 import styled from 'styled-components';
+import {connect} from 'react-redux';
+import {clientsFiltered} from '../../../features/ducks';
 const SearchWrap = styled.div`
 padding-top: 50px
 display: flex;
@@ -44,13 +46,31 @@ transition: 0.2s
     color: #f5a76e
   }
 `
-const SearchPanel = () => {
+class SearchPanel extends Component {
+  render() {
+    const {clientsFiltered} = this.props;
+    let text='';
+    const onTextAdded = (e) => {
+      return text = e.target.value;
+    }
     return (
         <SearchWrap>
-            <SearchLine placeholder='введите нужный раздел'></SearchLine>
-            <SearchButton>Найти</SearchButton>
-            <AddButton>Добавить</AddButton>
+            <SearchLine type="text" onChange={(e) => onTextAdded(e)} placeholder='введите нужный раздел'></SearchLine>
+            <SearchButton type='submit' onClick={() => clientsFiltered(text)}>Найти</SearchButton>
+            <AddButton >Добавить</AddButton>
         </SearchWrap>
     )
+  }
 }
-export default SearchPanel
+
+const mapStateToProps = (state) => {
+  return {
+      allClients: state.allClients,
+      loading: state.loading,
+      error: state.error
+  }
+}
+const mapDispatchToProps =  {
+  clientsFiltered
+};
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPanel);

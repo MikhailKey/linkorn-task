@@ -24,20 +24,26 @@ class MainContainer extends Component {
         .catch(res => this.props.allTasksError(res))
     }
     render() {
-        const {allClients, loading, error} = this.props;
+        const {allClients, filteredClients, loading, error} = this.props;
+        let clients = {};
+        if (filteredClients.length === 0) {
+            clients = allClients.map(client => {
+                return <ClientItem key={client.id} clientData={client}/>
+            })
+        } else { clients = filteredClients.map(client => {
+            return <ClientItem key={client.id} clientData={client}/>
+        })
+        }
         if (loading) {
             return <Spinner/>
         }
         if (error) {
             return <ErrorMessage/>
         }
+        const content = loading ? <Spinner/> : clients;
     return (
         <MainWrap>
-            {
-                allClients.map(client => {
-                    return <ClientItem key={client.id} clientData={client}/>
-                })
-            }
+            {content}
         </MainWrap>
     )
     }
@@ -45,6 +51,7 @@ class MainContainer extends Component {
 const mapStateToProps = (state) => {
     return {
         allClients: state.allClients,
+        filteredClients: state.filteredClients,
         loading: state.loading,
         error: state.error
     }
