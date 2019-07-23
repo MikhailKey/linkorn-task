@@ -1,5 +1,5 @@
 import React from 'react';
-import InfoServiceContext from '../coffeeServiceContext';
+import InfoServiceContext from '../infoServiceContext';
 
 
 const WithInfoService = () => (Wrapped) => {

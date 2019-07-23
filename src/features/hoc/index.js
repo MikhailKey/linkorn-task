@@ -1,3 +1,3 @@
-import WithCoffeeService from './withCoffeeService';
+import WithInfoService from './withInfoService';
 
-export default WithCoffeeService;
+export default WithInfoService;

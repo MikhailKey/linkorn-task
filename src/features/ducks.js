@@ -14,6 +14,18 @@ const reducer = (state = initialState, action) => {
             return state;
     }
 }
+
+
+const allClientsLoaded = (allClients) => {
+    return {
+        type: 'ALL_CLIENTS_LOADED',
+        payload: allClients
+    }
+}
 export default reducer
+
+export {
+    allClientsLoaded,
+}
 
     
