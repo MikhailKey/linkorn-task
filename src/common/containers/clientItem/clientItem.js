@@ -16,11 +16,6 @@ display: inline-block
 padding-bottom: 10px
 color: #304f5c
 `
-const PInfo = styled.p`
-display: inline-block
-padding-bottom: 10px
-#304f5c
-`
 const EditButton = styled.button`
 position: absolute
 left: 100%
@@ -38,16 +33,17 @@ transition: 0.2s
     color: #f5a76e
   }
 `
-const ClientItem = () => {
+const ClientItem = ({clientData}) => {
+    const {id, name, town, phone, email, objects} = clientData;
  return (
      <ClientWrap>
          <EditButton>Редактировать</EditButton>
-         <ClientTitle>Клиент №1</ClientTitle><br/>
-        <HFour>ФИО: </HFour><PInfo> Михаил Михаил</PInfo><br/>
-        <HFour>Телефон: </HFour><PInfo>+7 937 220 10 96</PInfo><br/>
-        <HFour>e-mail: </HFour><PInfo>Mamamia@mail.ru</PInfo><br/>
-        <HFour>Город: </HFour><PInfo>Майами</PInfo><br/>
-        <HFour>Количество объектов: </HFour><PInfo>1</PInfo><br/>
+         <ClientTitle>Клиент №{id}</ClientTitle><br/>
+        <HFour>ФИО: {name}</HFour><br/>
+        <HFour>Телефон: {phone}</HFour><br/>
+        <HFour>e-mail: {email}</HFour><br/>
+        <HFour>Город: {town}</HFour><br/>
+        <HFour>Количество объектов: {objects.length}</HFour><br/>
         </ClientWrap>
     
  )

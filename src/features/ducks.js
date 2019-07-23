@@ -8,7 +8,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                allClients:action.payload,
+                allClients: action.payload,
             }
             default: 
             return state;

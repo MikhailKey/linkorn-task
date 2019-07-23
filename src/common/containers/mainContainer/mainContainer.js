@@ -18,7 +18,6 @@ border-radius: 5px
 
 class MainContainer extends Component {
     componentDidMount() {
-        console.log(allClientsLoaded)
         const {InfoService} = this.props;
         InfoService.getAllClients()
         .then(res => this.props.allClientsLoaded(res))
