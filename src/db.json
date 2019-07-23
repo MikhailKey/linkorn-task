@@ -1,6 +1,7 @@
 {
     "clients": [
             {
+              "id": 1,
               "name":"Иванов Виктор Васильевич",
               "phone":"+8959 444 33 22",
               "email":"ivanovVictor@mail.ru",
@@ -33,6 +34,7 @@
               ]
             },
             {
+              "id": 2,
               "name":"Медведева Ирина Владимировна",
               "phone":"+8959 641 25 16",
               "email":"medvedeva@mail.ru",
