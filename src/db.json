@@ -1,0 +1,68 @@
+{
+    "clients": [
+            {
+              "name":"Иванов Виктор Васильевич",
+              "phone":"+8959 444 33 22",
+              "email":"ivanovVictor@mail.ru",
+              "town":"Moscow",
+              "objects":[
+                {
+                  "type":"авто",
+                  "contractNumber":"59559332",
+                  "status":"действует",
+                  "startDate":"24.01.05",
+                  "finishDate":"24.01.25",
+                  "services":{
+                    "name":"отслеживание автомобиля",
+                    "startDate":"24.01.06",
+                    "activity":"услуга выключена"
+                  }
+                },
+                {
+                  "type":"недвижимость",
+                  "contractNumber":"197668332",
+                  "status":"действует",
+                  "startDate":"24.07.05",
+                  "finishDate":"24.05.19",
+                  "services":{
+                    "name":"видеонаблюдение",
+                    "startDate":"09.11.17",
+                    "activity":"услуга включена"
+                  }
+                }
+              ]
+            },
+            {
+              "name":"Медведева Ирина Владимировна",
+              "phone":"+8959 641 25 16",
+              "email":"medvedeva@mail.ru",
+              "town":"Тверь",
+              "objects":[
+                {
+                  "type":"авто",
+                  "contractNumber":"64652",
+                  "status":"действует",
+                  "startDate":"11.06.15",
+                  "finishDate":"11.06.25",
+                  "services":{
+                    "name":"сигнализация",
+                    "startDate":"11.06.15",
+                    "activity":"услуга включена"
+                  }
+                },
+                {
+                  "type":"недвижимость",
+                  "contractNumber":"645452",
+                  "status":"действует",
+                  "startDate":"01.07.13",
+                  "finishDate":"01.07.23",
+                  "services":{
+                    "name":"датчик дыма",
+                    "startDate":"11.06.13",
+                    "activity":"услуга включена"
+                  }
+                }
+              ]
+            }
+          ]
+}
