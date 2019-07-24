@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
-import {addClosed} from '../../../features/ducks';
+import {addClosed, onAdd} from '../../../features/ducks';
 const EditBg = styled.div`
 z-index: 99
 width: 100%;
@@ -52,6 +52,33 @@ margin-top: 10px
 `
 
 class AddClient extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: '',
+            phone: '',
+            email: '',
+            town: '',
+        }
+        this.onNameChange = this.onNameChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+    }
+    onNameChange(e) {
+        this.setState({
+            name: e.target.value
+        })
+    }
+    onSubmit(e){
+        e.preventDefault();
+        this.props.onAdd(this.state.name);
+        this.setState({
+            name: '',
+            phone: '',
+            email: '',
+            town: '',
+        })
+    }
+
     render() {
         const {addClosed, addIsOpened} = this.props;
         let content = (<EditBg>
@@ -60,17 +87,18 @@ class AddClient extends Component {
                     <h2>Добавление клиента</h2>
                      <CloseButton onClick={() => addClosed()}>&times;</CloseButton>
                 </EditHeader>
+                <form onSubmit={this.onSubmit}>
                 <Hfour>Имя:</Hfour>
-                    <EditInput placeholder='Введите имя'/>
+                    <EditInput placeholder='Введите имя' onChange={this.onNameChange}        
+             value={this.state.name}/>
                 <Hfour>Телефон:</Hfour>
                     <EditInput placeholder='Введите телефон'/>
                 <Hfour>E-mail:</Hfour>
                     <EditInput placeholder='Введите e-mail'/>
                 <Hfour>Город:</Hfour>
                     <EditInput placeholder='Введите e-mail'/>
-                <Hfour>Объекты: </Hfour>
-                <EditInput placeholder='Введите колличество объектов'/>
-                
+                <button type="submit">Отправить</button>
+                </form>
             </EditWrap>
         </EditBg>
         )
@@ -92,6 +120,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = {
     addClosed,
+    onAdd,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddClient);

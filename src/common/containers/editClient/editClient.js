@@ -49,6 +49,7 @@ border-radius: 3px
 const Hfour = styled.h4`
 
 margin-top: 10px
+margin-bottom: 5px
 `
 class EditClient extends Component  {
     render() {
@@ -61,17 +62,18 @@ class EditClient extends Component  {
                     <h2>Редактирование клиента №{id}</h2>
                      <CloseButton onClick={() => editClosed()}>&times;</CloseButton>
                 </EditHeader>
+                <form>
                 <Hfour>Имя:</Hfour>
                     <EditInput value={name}/>
-                <Hfour>Телефон:</Hfour>
+               {/*  <Hfour>Телефон:</Hfour>
                     <EditInput value={phone}/>
                 <Hfour>E-mail:</Hfour>
                     <EditInput value={email}/>
                 <Hfour>Город:</Hfour>
                     <EditInput value={town}/>
                 <Hfour>Объекты: </Hfour>
-                    <p>{{objects}.length}</p>
-                
+                    <p>{{objects}.length}</p>*/}
+                </form>
             </EditWrap>
         </EditBg>
     )

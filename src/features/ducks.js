@@ -6,6 +6,8 @@ const initialState = {
     editIsOpened: false,
     addIsOpened: false,
     clientOnEdit: [],
+    newClient: [],
+    clientId: 3,
 }
 const reducer = (state = initialState, action) => {
     switch(action.type) {
@@ -64,20 +66,38 @@ const reducer = (state = initialState, action) => {
                 town: info.town,
                 phone: info.phone,
                 email: info.email,
-                objects: info.objects,
+               /* objects: info.objects,
                 objectType: info.objects.type,
                 objectContractNumber: info.objects.contractNumber,
                 objectStatus: info.objects.status,
                 objectStartDate: info.objects.startDate,
                 objectFinishDate: info.objects.finishDate,
-                objectServices: info.objects.Services,
+                objectServices: info.objects.Services,*/
             }
             return {
                 ...state,
                 clientOnEdit: client,
             }
+        case 'ON_ADD':
+            let name  = action.name;
+            let newClient = {
+                id: state.clientId+1,
+                name: name,
+            }
+            const newArr = [...state.allClients, newClient]
+            return {
+                ...state,
+                allClients: newArr,
+                addIsOpened: false,
+            }
             default: 
             return state;
+    }
+}
+const onAdd = (text) => {
+    return {
+        type: 'ON_ADD',
+        name: text,
     }
 }
 const infoTransfered = (client) => {
@@ -135,7 +155,8 @@ export {
     editClosed,
     addClosed,
     addOpened,
-    infoTransfered
+    infoTransfered,
+    onAdd
 }
 
     

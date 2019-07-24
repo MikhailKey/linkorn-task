@@ -38,16 +38,16 @@ transition: 0.2s;
 `
 const ClientItem = ({clientData, editOpened, infoTransfered}) => {
     const {id, name, town, phone, email, objects} = clientData;
-    const onObjects = objects.filter(object => object.status === "действует")
+    //const onObjects = objects.filter(object => object.status === "действует")
  return (
      <ClientWrap>
          <EditButton onClick={() => { editOpened(); infoTransfered(clientData)}}>Редактировать</EditButton>
-         <ClientTitle>Клиент №{id}</ClientTitle><br/>
+         {/*<ClientTitle>Клиент №{id}</ClientTitle><br/>*/}
         <HFour>ФИО: {name}</HFour><br/>
-        <HFour>Телефон: {phone}</HFour><br/>
+         {/*<HFour>Телефон: {phone}</HFour><br/>
         <HFour>e-mail: {email}</HFour><br/>
         <HFour>Город: {town}</HFour><br/>
-        <HFour>Количество не отключенных объектов: {onObjects.length}</HFour><br/>
+        <HFour>Количество не отключенных объектов: {objects.length}</HFour><br/>*/}
         </ClientWrap>
     
  )
