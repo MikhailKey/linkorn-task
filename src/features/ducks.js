@@ -33,7 +33,25 @@ const reducer = (state = initialState, action) => {
                     return items+=state.allClients[i];
                 }
             }*/
-            let items = state.allClients.filter((item) => (item.name || item.town || item.phone || item.email).toLowerCase().includes(searchValue.toLowerCase()));
+            let items = state.allClients.filter((item) => {
+                if (item.name.toLowerCase().includes(searchValue.toLowerCase())) {
+                    return item;
+                } else if (item.town.toLowerCase().includes(searchValue.toLowerCase())) {
+                    return item; 
+                } else if (item.phone.toLowerCase().includes(searchValue.toLowerCase())) {
+                    return item; 
+                } else if (item.email.toLowerCase().includes(searchValue.toLowerCase())) {
+                    return item; 
+                } else return null;
+                
+            });
+            /*let items = state.allClients.filter(item => {
+                for (let key in item) {
+                    if (item[key].includes(searchValue)) {
+                        return item[key].includes(searchValue)
+                    } 
+                }
+            })*/
             return {
                 ...state,
                 filteredClients: items,
@@ -100,6 +118,9 @@ const reducer = (state = initialState, action) => {
             default: 
             return state;
     }
+}
+const onEdit = (id, name, phone, email, town) => {
+
 }
 const onAdd = (name, phone, email, town) => {
     return {

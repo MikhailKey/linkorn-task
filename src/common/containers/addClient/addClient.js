@@ -107,14 +107,25 @@ class AddClient extends Component {
                 </EditHeader>
                 <form onSubmit={this.onSubmit}>
                 <Hfour>Имя:</Hfour>
-                    <EditInput placeholder='Введите имя' onChange={this.onNameChange}        
-             value={this.state.name}/>
+                    <EditInput 
+                    placeholder='Введите имя' 
+                    onChange={this.onNameChange}        
+                    value={this.state.name} required/>
                 <Hfour>Телефон:</Hfour>
-                    <EditInput placeholder='Введите телефон' onChange={this.onPhoneChange} value={this.state.phone}/>
+                    <EditInput 
+                    placeholder='Введите телефон' 
+                    onChange={this.onPhoneChange} 
+                    value={this.state.phone} required/>
                 <Hfour>E-mail:</Hfour>
-                    <EditInput placeholder='Введите e-mail' onChange={this.onEmailChange} value={this.state.email}/>
+                    <EditInput 
+                    placeholder='Введите e-mail' 
+                    onChange={this.onEmailChange} 
+                    value={this.state.email} required/>
                 <Hfour>Город:</Hfour>
-                    <EditInput placeholder='Введите город' onChange={this.onTownChange} value={this.state.town}/>
+                    <EditInput 
+                    placeholder='Введите город' 
+                    onChange={this.onTownChange} 
+                    value={this.state.town} required/>
                 <button type="submit">Отправить</button>
                 </form>
             </EditWrap>

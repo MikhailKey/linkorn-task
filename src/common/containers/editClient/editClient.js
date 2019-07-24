@@ -52,9 +52,53 @@ margin-top: 10px
 margin-bottom: 5px
 `
 class EditClient extends Component  {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: '',
+            phone: '',
+            email: '',
+            town: '',
+        }
+    this.onNameChange = this.onNameChange.bind(this);
+    this.onPhoneChange = this.onPhoneChange.bind(this);
+    this.onEmailChange = this.onEmailChange.bind(this);
+    this.onTownChange = this.onTownChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    }
+    onNameChange(e) {
+        this.setState({
+            name: e.target.value
+        })
+    }
+    onPhoneChange(e) {
+        this.setState({
+            phone: e.target.value
+        })
+    }
+    onEmailChange(e) {
+        this.setState({
+            email: e.target.value
+        })
+    }
+    onTownChange(e) {
+        this.setState({
+            town: e.target.value
+        })
+    }
+    onSubmit(e){
+        e.preventDefault();
+        this.props.onEdit(this.state.name, this.state.phone,this.state.email, this.state.town);
+        this.setState({
+            name: '',
+            phone: '',
+            email: '',
+            town: '',
+        })
+    }
     render() {
     const {editIsOpened, editClosed, clientOnEdit} = this.props;
-    const {id, name, town, phone, email, objects} = clientOnEdit;
+    const {id, name, town, phone, email} = clientOnEdit;
     let content = (
         <EditBg>
             <EditWrap>
@@ -65,14 +109,15 @@ class EditClient extends Component  {
                 <form>
                 <Hfour>Имя:</Hfour>
                     <EditInput value={name}/>
-               {/*  <Hfour>Телефон:</Hfour>
+                 <Hfour>Телефон:</Hfour>
                     <EditInput value={phone}/>
                 <Hfour>E-mail:</Hfour>
                     <EditInput value={email}/>
                 <Hfour>Город:</Hfour>
                     <EditInput value={town}/>
-                <Hfour>Объекты: </Hfour>
+                {/*<Hfour>Объекты: </Hfour>
                     <p>{{objects}.length}</p>*/}
+                <button type="submit">Отправить</button>
                 </form>
             </EditWrap>
         </EditBg>
