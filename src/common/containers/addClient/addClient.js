@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
-import {editClosed} from '../../../features/ducks';
+import {addClosed} from '../../../features/ducks';
 const EditBg = styled.div`
 z-index: 99
 width: 100%;
@@ -50,48 +50,48 @@ const Hfour = styled.h4`
 
 margin-top: 10px
 `
-class EditClient extends Component  {
+
+class AddClient extends Component {
     render() {
-    const {editIsOpened, editClosed, clientOnEdit} = this.props;
-    const {id, name, town, phone, email, objects} = clientOnEdit;
-    let content = (
-        <EditBg>
+        const {addClosed, addIsOpened} = this.props;
+        let content = (<EditBg>
             <EditWrap>
                 <EditHeader>
-                    <h2>Редактирование клиента №{id}</h2>
-                     <CloseButton onClick={() => editClosed()}>&times;</CloseButton>
+                    <h2>Добавление клиента</h2>
+                     <CloseButton onClick={() => addClosed()}>&times;</CloseButton>
                 </EditHeader>
                 <Hfour>Имя:</Hfour>
-                    <EditInput value={name}/>
+                    <EditInput placeholder='Введите имя'/>
                 <Hfour>Телефон:</Hfour>
-                    <EditInput value={phone}/>
+                    <EditInput placeholder='Введите телефон'/>
                 <Hfour>E-mail:</Hfour>
-                    <EditInput value={email}/>
+                    <EditInput placeholder='Введите e-mail'/>
                 <Hfour>Город:</Hfour>
-                    <EditInput value={town}/>
+                    <EditInput placeholder='Введите e-mail'/>
                 <Hfour>Объекты: </Hfour>
-                    <p>{{objects}.length}</p>
+                <EditInput placeholder='Введите колличество объектов'/>
                 
             </EditWrap>
         </EditBg>
-    )
-    if (!editIsOpened) {
-        content=null;
-    }
-    return (
-        <>
-        {content}
-        </>
-    )
+        )
+        if (!addIsOpened) {
+            content=null;
+        }
+        return (
+            <>
+            {content}
+            </>
+        )
     }
 }
 const mapStateToProps = (state) => {
     return {    
-    editIsOpened: state.editIsOpened,
+    addIsOpened: state.addIsOpened,
     clientOnEdit: state.clientOnEdit,
     }
 }
 const mapDispatchToProps = {
-    editClosed,
+    addClosed,
 }
-export default connect(mapStateToProps, mapDispatchToProps)(EditClient);
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddClient);

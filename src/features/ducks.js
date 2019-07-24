@@ -3,7 +3,8 @@ const initialState = {
     loading: true,
     error: false,
     filteredClients: [], 
-    isOpened: false,
+    editIsOpened: false,
+    addIsOpened: false,
     clientOnEdit: [],
 }
 const reducer = (state = initialState, action) => {
@@ -38,21 +39,38 @@ const reducer = (state = initialState, action) => {
         case 'EDIT_OPENED':
             return {
                 ...state,
-                isOpened: true
+                editIsOpened: true
             };
         case 'EDIT_CLOSED':
             return {
                 ...state,
-                isOpened: false
+                editIsOpened: false
+            }
+        case 'ADD_OPENED':
+            return {
+                ...state,
+                addIsOpened: true
+            };
+        case 'ADD_CLOSED':
+            return {
+                ...state,
+                addIsOpened: false
             }
         case 'INFO_TRANSFERED':
             let info = action.client;
             let client = {
+                id: info.id,
                 name: info.name,
                 town: info.town,
                 phone: info.phone,
                 email: info.email,
                 objects: info.objects,
+                objectType: info.objects.type,
+                objectContractNumber: info.objects.contractNumber,
+                objectStatus: info.objects.status,
+                objectStartDate: info.objects.startDate,
+                objectFinishDate: info.objects.finishDate,
+                objectServices: info.objects.Services,
             }
             return {
                 ...state,
@@ -63,7 +81,6 @@ const reducer = (state = initialState, action) => {
     }
 }
 const infoTransfered = (client) => {
-    console.log(client)
     return {
         type: 'INFO_TRANSFERED',
         client: client
@@ -77,6 +94,16 @@ const editClosed = () => {
 const editOpened = () => {
     return {
         type: 'EDIT_OPENED'
+    }
+}
+const addClosed = () => {
+    return {
+        type: 'ADD_CLOSED'
+    }
+}
+const addOpened = () => {
+    return {
+        type: 'ADD_OPENED'
     }
 }
 const allClientsError = (errorMessage) => {
@@ -106,6 +133,8 @@ export {
     clientsFiltered,
     editOpened,
     editClosed,
+    addClosed,
+    addOpened,
     infoTransfered
 }
 

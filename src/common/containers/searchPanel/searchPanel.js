@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import styled from 'styled-components';
 import {connect} from 'react-redux';
-import {clientsFiltered} from '../../../features/ducks';
+import {clientsFiltered, addOpened} from '../../../features/ducks';
 const SearchWrap = styled.div`
 padding-top: 50px
 display: flex;
@@ -49,7 +49,7 @@ transition: 0.2s
 `
 class SearchPanel extends Component {
   render() {
-    const {clientsFiltered} = this.props;
+    const {clientsFiltered, addOpened} = this.props;
     let text='';
     const onTextAdded = (e) => {
       return text = e.target.value;
@@ -58,7 +58,7 @@ class SearchPanel extends Component {
         <SearchWrap>
             <SearchLine type="text" onChange={(e) => onTextAdded(e)} placeholder='введите нужный раздел'></SearchLine>
             <SearchButton type='submit' onClick={() => clientsFiltered(text)}>Найти</SearchButton>
-            <AddButton >Добавить</AddButton>
+            <AddButton onClick={() =>  addOpened()}>Добавить</AddButton>
         </SearchWrap>
     )
   }
@@ -68,10 +68,12 @@ const mapStateToProps = (state) => {
   return {
       allClients: state.allClients,
       loading: state.loading,
-      error: state.error
+      error: state.error,
+      addIsOpened: state.isOpened
   }
 }
 const mapDispatchToProps =  {
-  clientsFiltered
+  clientsFiltered,
+  addOpened,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPanel);

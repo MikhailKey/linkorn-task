@@ -51,7 +51,9 @@ const ClientItem = ({clientData, editOpened, infoTransfered}) => {
         </ClientWrap>
     
  )
+ 
 }
+
 const mapStateToProps = (state) => {
   return {
       isOpened: state.isOpened
