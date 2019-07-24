@@ -21,16 +21,17 @@ flex-basis: 10%;
 background: linear-gradient(to left, #2193b0, #6dd5ed);
 color: white;
 border: none;
-font-size: 17px
-height: 35px
-cursor: pointer
-outline: none
-transition: 0.2s
+font-size: 17px;
+height: 35px;
+outline: none;
+cursor: pointer;
+transition: 0.2s;
 &:hover {
-    color: #f5a76e
+    color: #f5a76e;
   }
 `
 const AddButton = styled.button`
+cursor: pointer
 flex-basis: 10%;  
 background: linear-gradient(to right, #2193b0, #6dd5ed);
 color: white;

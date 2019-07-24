@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import styled from 'styled-components';
 import {connect} from 'react-redux';
 import {editClosed} from '../../../features/ducks';
@@ -21,7 +21,6 @@ const EditWrap = styled.div`
         left: 50%;
         transform: translateX(-50%) translateY(-50%);
         width: 1170px;
-        height: 250px;
         background: white;
         padding: 15px;
         border-radius: 5px;
@@ -40,14 +39,37 @@ const CloseButton = styled.button`
             color: red;
         }
 `
-const EditClient = ({isOpened, editClosed}) => {
+const EditInput = styled.input`
+width: 50%
+height: 30px
+padding-left: 10px
+`
+const Hfour = styled.h4`
+
+margin-top: 10px
+`
+class EditClient extends Component  {
+    render() {
+    const {isOpened, editClosed, clientOnEdit} = this.props;
+    const {name, town, phone, email, objects} = clientOnEdit;
     let content = (
         <EditBg>
             <EditWrap>
                 <EditHeader>
-                <h2>Редактирование клиента</h2>
-                <CloseButton onClick={() => editClosed()}>&times;</CloseButton>
+                    <h2>Редактирование клиента</h2>
+                     <CloseButton onClick={() => editClosed()}>&times;</CloseButton>
                 </EditHeader>
+                <Hfour>Имя:</Hfour>
+                    <EditInput value={name}/>
+                <Hfour>Телефон:</Hfour>
+                    <EditInput value={phone}/>
+                <Hfour>E-mail:</Hfour>
+                    <EditInput value={email}/>
+                <Hfour>Город:</Hfour>
+                    <EditInput value={town}/>
+                <Hfour>Объекты: </Hfour>
+                    <Hfour>{town}</Hfour>
+                
             </EditWrap>
         </EditBg>
     )
@@ -59,10 +81,12 @@ const EditClient = ({isOpened, editClosed}) => {
         {content}
         </>
     )
+    }
 }
 const mapStateToProps = (state) => {
     return {    
     isOpened: state.isOpened,
+    clientOnEdit: state.clientOnEdit,
     }
 }
 const mapDispatchToProps = {

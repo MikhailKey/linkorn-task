@@ -4,6 +4,7 @@ const initialState = {
     error: false,
     filteredClients: [], 
     isOpened: false,
+    clientOnEdit: [],
 }
 const reducer = (state = initialState, action) => {
     switch(action.type) {
@@ -29,7 +30,6 @@ const reducer = (state = initialState, action) => {
                     return items+=state.allClients[i];
                 }
             }*/
-            debugger
             let items = state.allClients.filter((item) => (item.name || item.town || item.phone || item.email).toLowerCase().includes(searchValue.toLowerCase()));
             return {
                 ...state,
@@ -45,8 +45,28 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 isOpened: false
             }
+        case 'INFO_TRANSFERED':
+            let info = action.client;
+            let client = {
+                name: info.name,
+                town: info.town,
+                phone: info.phone,
+                email: info.email,
+                objects: info.objects,
+            }
+            return {
+                ...state,
+                clientOnEdit: client,
+            }
             default: 
             return state;
+    }
+}
+const infoTransfered = (client) => {
+    console.log(client)
+    return {
+        type: 'INFO_TRANSFERED',
+        client: client
     }
 }
 const editClosed = () => {
@@ -72,7 +92,7 @@ const allClientsLoaded = (allClients) => {
     }
 }
 const clientsFiltered = (text) => {
-    console.log(text)
+    
     return {
         type: 'CLIENTS_FILTERED',
         payload: text
@@ -85,7 +105,8 @@ export {
     allClientsError,
     clientsFiltered,
     editOpened,
-    editClosed
+    editClosed,
+    infoTransfered
 }
 
     
