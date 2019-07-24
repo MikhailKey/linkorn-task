@@ -61,6 +61,9 @@ class AddClient extends Component {
             town: '',
         }
         this.onNameChange = this.onNameChange.bind(this);
+        this.onPhoneChange = this.onPhoneChange.bind(this);
+        this.onEmailChange = this.onEmailChange.bind(this);
+        this.onTownChange = this.onTownChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
     onNameChange(e) {
@@ -68,9 +71,24 @@ class AddClient extends Component {
             name: e.target.value
         })
     }
+    onPhoneChange(e) {
+        this.setState({
+            phone: e.target.value
+        })
+    }
+    onEmailChange(e) {
+        this.setState({
+            email: e.target.value
+        })
+    }
+    onTownChange(e) {
+        this.setState({
+            town: e.target.value
+        })
+    }
     onSubmit(e){
         e.preventDefault();
-        this.props.onAdd(this.state.name);
+        this.props.onAdd(this.state.name, this.state.phone,this.state.email, this.state.town);
         this.setState({
             name: '',
             phone: '',
@@ -92,11 +110,11 @@ class AddClient extends Component {
                     <EditInput placeholder='Введите имя' onChange={this.onNameChange}        
              value={this.state.name}/>
                 <Hfour>Телефон:</Hfour>
-                    <EditInput placeholder='Введите телефон'/>
+                    <EditInput placeholder='Введите телефон' onChange={this.onPhoneChange} value={this.state.phone}/>
                 <Hfour>E-mail:</Hfour>
-                    <EditInput placeholder='Введите e-mail'/>
+                    <EditInput placeholder='Введите e-mail' onChange={this.onEmailChange} value={this.state.email}/>
                 <Hfour>Город:</Hfour>
-                    <EditInput placeholder='Введите e-mail'/>
+                    <EditInput placeholder='Введите город' onChange={this.onTownChange} value={this.state.town}/>
                 <button type="submit">Отправить</button>
                 </form>
             </EditWrap>

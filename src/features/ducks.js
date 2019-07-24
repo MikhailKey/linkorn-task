@@ -80,9 +80,16 @@ const reducer = (state = initialState, action) => {
             }
         case 'ON_ADD':
             let name  = action.name;
+            let phone = action.phone;
+            let email = action.email;
+            let town = action.town;
             let newClient = {
                 id: state.clientId+1,
                 name: name,
+                phone: phone,
+                email: email,
+                town: town,
+
             }
             const newArr = [...state.allClients, newClient]
             return {
@@ -94,10 +101,13 @@ const reducer = (state = initialState, action) => {
             return state;
     }
 }
-const onAdd = (text) => {
+const onAdd = (name, phone, email, town) => {
     return {
         type: 'ON_ADD',
-        name: text,
+        name,
+        phone,
+        email,
+        town
     }
 }
 const infoTransfered = (client) => {
