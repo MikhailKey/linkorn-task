@@ -106,13 +106,11 @@ const reducer = (state = initialState, action) => {
                 addIsOpened: false,
             }
         case 'ON_EDIT':
-            
             let editClient = {...action.editClient, id: action.id}
             const clientIndex = state.allClients.findIndex(item => item.id === editClient.id);
             
             return {
                 ...state,
-                
                 allClients: [
                     ...state.allClients.slice(0, clientIndex),
                     editClient,

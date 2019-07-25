@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {connect} from 'react-redux';
 import {addClosed, onAdd} from '../../../features/ducks';
 import { withFormik, Form, Field } from 'formik';
+import './addClient.css'
 const EditBg = styled.div`
 z-index: 99
 width: 100%;
@@ -61,13 +62,13 @@ class AddClient extends Component {
                 </EditHeader>
                 <Form>
                 <Hfour>Имя:</Hfour>
-                    <Field type='text' name='name' placeholder='Введите Ваше имя'/>
+                    <Field className="editInput" type='text' name='name' placeholder='Введите Ваше имя'/>
                 <Hfour>Телефон:</Hfour>
-                    <Field type='text' name='phone' placeholder='Введите Ваш телефон'/>
+                    <Field className="editInput" type='text' name='phone' placeholder='Введите Ваш телефон'/>
                 <Hfour>E-mail:</Hfour>
-                    <Field type='text' name='email' placeholder='Введите Ваш e-mail'/>
+                    <Field className="editInput" type='text' name='email' placeholder='Введите Ваш e-mail'/>
                 <Hfour>Town:</Hfour>
-                    <Field type='text' name='town' placeholder='Введите Ваш город'/>
+                    <Field className="editInput" type='text' name='town' placeholder='Введите Ваш город'/>
                 <button type="submit" onClick={() => onAdd(values)}>Отправить</button>
                 </Form>
             </EditWrap>
