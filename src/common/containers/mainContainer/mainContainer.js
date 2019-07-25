@@ -8,7 +8,7 @@ import Spinner from '../../components/spinner';
 import ErrorMessage from '../../components/errorMessage';
 
 const MainWrap = styled.div`
-margin-top: 20px;
+margin: 20px 0;
 display: flex;
 flex-direction: column
 padding: 15px;

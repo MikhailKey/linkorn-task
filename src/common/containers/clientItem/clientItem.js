@@ -37,7 +37,7 @@ transition: 0.2s;
   }
 `
 const ClientItem = ({clientData, editOpened, infoTransfered}) => {
-    const {id, name, town, phone, email, objects} = clientData;
+    const {id, name, town, phone, email} = clientData;
     //const onObjects = objects.filter(object => object.status === "действует")
  return (
      <ClientWrap>

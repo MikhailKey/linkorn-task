@@ -97,38 +97,44 @@ const reducer = (state = initialState, action) => {
                 clientOnEdit: client,
             }
         case 'ON_ADD':
-            let name  = action.name;
-            let phone = action.phone;
-            let email = action.email;
-            let town = action.town;
-            let newClient = {
-                id: state.clientId+1,
-                name: name,
-                phone: phone,
-                email: email,
-                town: town,
-
-            }
-            const newArr = [...state.allClients, newClient]
+               let newClient = {...action.newClient, id: state.clientId+1};
+            const newArr = [...state.allClients, newClient];
             return {
                 ...state,
                 allClients: newArr,
                 addIsOpened: false,
             }
+        case 'ON_EDIT':
+            
+            let editClient = {...action.editClient, id: action.id}
+            const clientIndex = state.allClients.findIndex(item => item.id === editClient.id);
+            
+            return {
+                ...state,
+                
+                allClients: [
+                    ...state.allClients.slice(0, clientIndex),
+                    editClient,
+                    ...state.allClients.slice(clientIndex+1),
+                ]
+            };
+            
             default: 
             return state;
     }
 }
-const onEdit = (id, name, phone, email, town) => {
-
+const onEdit = (id, editClient) => {
+    console.log(id, editClient)
+return {
+    type: 'ON_EDIT',
+    id,
+    editClient,
 }
-const onAdd = (name, phone, email, town) => {
+}
+const onAdd = (newClient) => {
     return {
         type: 'ON_ADD',
-        name,
-        phone,
-        email,
-        town
+        newClient,
     }
 }
 const infoTransfered = (client) => {
@@ -187,7 +193,8 @@ export {
     addClosed,
     addOpened,
     infoTransfered,
-    onAdd
+    onAdd,
+    onEdit
 }
 
     

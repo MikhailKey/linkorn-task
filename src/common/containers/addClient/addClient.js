@@ -88,7 +88,7 @@ class AddClient extends Component {
     }
     onSubmit(e){
         e.preventDefault();
-        this.props.onAdd(this.state.name, this.state.phone,this.state.email, this.state.town);
+        this.props.onAdd(this.state);
         this.setState({
             name: '',
             phone: '',

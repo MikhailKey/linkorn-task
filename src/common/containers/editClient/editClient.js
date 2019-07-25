@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import styled from 'styled-components';
 import {connect} from 'react-redux';
-import {editClosed} from '../../../features/ducks';
+import {editClosed, onEdit} from '../../../features/ducks';
 const EditBg = styled.div`
 z-index: 99
 width: 100%;
@@ -51,6 +51,12 @@ const Hfour = styled.h4`
 margin-top: 10px
 margin-bottom: 5px
 `
+const BtnWrap = styled.div`
+display: flex
+flex-direction: column
+width: 10%
+`
+
 class EditClient extends Component  {
     constructor(props) {
         super(props);
@@ -65,6 +71,14 @@ class EditClient extends Component  {
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onTownChange = this.onTownChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    }
+    componentDidMount() {
+        this.setState({
+            name: this.props.clientOnEdit.name,
+            phone: this.props.clientOnEdit.phone,
+            email: this.props.clientOnEdit.email,
+            town: this.props.clientOnEdit.town,
+        })
     }
     onNameChange(e) {
         this.setState({
@@ -88,7 +102,8 @@ class EditClient extends Component  {
     }
     onSubmit(e){
         e.preventDefault();
-        this.props.onEdit(this.state.name, this.state.phone,this.state.email, this.state.town);
+        const id = this.props.clientOnEdit.id;
+        this.props.onEdit(id, this.state);
         this.setState({
             name: '',
             phone: '',
@@ -97,8 +112,9 @@ class EditClient extends Component  {
         })
     }
     render() {
+    
     const {editIsOpened, editClosed, clientOnEdit} = this.props;
-    const {id, name, town, phone, email} = clientOnEdit;
+    const {id, name, email, town, phone} = clientOnEdit;
     let content = (
         <EditBg>
             <EditWrap>
@@ -106,18 +122,33 @@ class EditClient extends Component  {
                     <h2>Редактирование клиента №{id}</h2>
                      <CloseButton onClick={() => editClosed()}>&times;</CloseButton>
                 </EditHeader>
-                <form>
+                <form onSubmit={this.onSubmit}>
                 <Hfour>Имя:</Hfour>
-                    <EditInput value={name}/>
+                    <EditInput 
+                    onChange={this.onNameChange} 
+                    defaultValue={name}                    
+                    required/>
                  <Hfour>Телефон:</Hfour>
-                    <EditInput value={phone}/>
+                    <EditInput 
+                    onChange={this.onPhoneChange} 
+                    defaultValue={phone}
+                    required/>
                 <Hfour>E-mail:</Hfour>
-                    <EditInput value={email}/>
+                    <EditInput 
+                    onChange={this.onEmailChange} 
+                    defaultValue={email}
+                    required/>
                 <Hfour>Город:</Hfour>
-                    <EditInput value={town}/>
+                    <EditInput 
+                    onChange={this.onTownChange} 
+                    defaultValue={town}
+                    required/>
                 {/*<Hfour>Объекты: </Hfour>
                     <p>{{objects}.length}</p>*/}
-                <button type="submit">Отправить</button>
+                <BtnWrap>
+                <button type="submit">Сохранить</button>
+                <button onClick={() => editClosed()}>Закрыть</button>
+                </BtnWrap>
                 </form>
             </EditWrap>
         </EditBg>
@@ -140,5 +171,6 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = {
     editClosed,
+    onEdit,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(EditClient);
