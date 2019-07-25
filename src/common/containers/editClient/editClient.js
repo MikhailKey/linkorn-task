@@ -63,6 +63,7 @@ class EditClient extends Component  {
     } = this.props;
     const {id, services} = clientOnEdit;
     //const servicesContent = services.map(object => <ObjectsList key={object.contractNumber} servicesData={services}/>)
+    const onServices = services.filter(object => object.status === "действует")
     let content = (
         <EditBg>
             <EditWrap>
