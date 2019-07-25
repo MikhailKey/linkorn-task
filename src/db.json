@@ -6,7 +6,7 @@
               "phone":"+8959 444 33 22",
               "email":"ivanovVictor@mail.ru",
               "town":"Москва",
-              "objects":[
+              "services":[
                 {
                   "type":"авто",
                   "contractNumber":"59559332",
@@ -39,7 +39,7 @@
               "phone":"+8959 641 25 16",
               "email":"medvedeva@mail.ru",
               "town":"Тверь",
-              "objects":[
+              "services":[
                 {
                   "type":"авто",
                   "contractNumber":"64652",
@@ -72,7 +72,7 @@
               "phone":"+6765 552 17 77",
               "email":"drozdovNik@gmail.com",
               "town":"Казань",
-              "objects":[
+              "services":[
                 {
                   "type":"авто",
                   "contractNumber":"67321652",

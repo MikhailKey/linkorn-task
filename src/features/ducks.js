@@ -77,21 +77,7 @@ const reducer = (state = initialState, action) => {
                 addIsOpened: false
             }
         case 'INFO_TRANSFERED':
-            let info = action.client;
-            let client = {
-                id: info.id,
-                name: info.name,
-                town: info.town,
-                phone: info.phone,
-                email: info.email,
-               /* objects: info.objects,
-                objectType: info.objects.type,
-                objectContractNumber: info.objects.contractNumber,
-                objectStatus: info.objects.status,
-                objectStartDate: info.objects.startDate,
-                objectFinishDate: info.objects.finishDate,
-                objectServices: info.objects.Services,*/
-            }
+            let client = action.client;
             return {
                 ...state,
                 clientOnEdit: client,
@@ -123,7 +109,6 @@ const reducer = (state = initialState, action) => {
     }
 }
 const onEdit = (id, editClient) => {
-    console.log(id, editClient)
 return {
     type: 'ON_EDIT',
     id,
@@ -139,7 +124,7 @@ const onAdd = (newClient) => {
 const infoTransfered = (client) => {
     return {
         type: 'INFO_TRANSFERED',
-        client: client
+        client,
     }
 }
 const editClosed = () => {

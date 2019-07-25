@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import styled from 'styled-components';
 import {connect} from 'react-redux';
+import ObjectsList from '../objectsList';
 import {editClosed, onEdit} from '../../../features/ducks';
 import { withFormik, Form, Field } from 'formik';
 const EditBg = styled.div`
@@ -49,7 +50,7 @@ const BtnWrap = styled.div`
 display: flex
 flex-direction: column
 width: 10%
-`
+`  
 
 class EditClient extends Component  {
     render() {
@@ -60,7 +61,8 @@ class EditClient extends Component  {
         onEdit,
         values
     } = this.props;
-    const {id} = clientOnEdit;
+    const {id, services} = clientOnEdit;
+    //const servicesContent = services.map(object => <ObjectsList key={object.contractNumber} servicesData={services}/>)
     let content = (
         <EditBg>
             <EditWrap>
@@ -81,7 +83,9 @@ class EditClient extends Component  {
                 <button type="submit" onClick={() => onEdit(id, values)}>Сохранить</button>
                 <button onClick={() => editClosed()}>Закрыть</button>
                 </BtnWrap>
+                
                 </Form>
+                
             </EditWrap>
         </EditBg>
     )
@@ -106,7 +110,7 @@ const mapDispatchToProps = {
     onEdit,
 }
 const formikEditClient = withFormik({
-    mapPropsToValues({clientOnEdit}) {
+    mapPropsToValues(clientOnEdit) {
         return {
             name: clientOnEdit.name || '',
             phone: clientOnEdit.phone || '',
@@ -114,8 +118,6 @@ const formikEditClient = withFormik({
             town: clientOnEdit.town || '',
         }
     },
-    handleSubmit(values) {
-      
-    }
+    handleSubmit(values) {}
 })(EditClient)
 export default connect(mapStateToProps, mapDispatchToProps)(formikEditClient);
