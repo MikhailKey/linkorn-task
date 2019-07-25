@@ -101,6 +101,7 @@ const reducer = (state = initialState, action) => {
             const newArr = [...state.allClients, newClient];
             return {
                 ...state,
+                clientId: state.clientId+1,
                 allClients: newArr,
                 addIsOpened: false,
             }

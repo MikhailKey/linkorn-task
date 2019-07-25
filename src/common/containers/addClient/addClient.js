@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
 import {addClosed, onAdd} from '../../../features/ducks';
+import { withFormik, Form, Field } from 'formik';
 const EditBg = styled.div`
 z-index: 99
 width: 100%;
@@ -39,95 +40,36 @@ const CloseButton = styled.button`
             color: red;
         }
 `
-const EditInput = styled.input`
-width: 50%
-height: 30px
-padding-left: 10px
-border: 1px solid #6dd5ed;
-border-radius: 3px
-`
 const Hfour = styled.h4`
 
 margin-top: 10px
 `
 
 class AddClient extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: '',
-            phone: '',
-            email: '',
-            town: '',
-        }
-        this.onNameChange = this.onNameChange.bind(this);
-        this.onPhoneChange = this.onPhoneChange.bind(this);
-        this.onEmailChange = this.onEmailChange.bind(this);
-        this.onTownChange = this.onTownChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-    }
-    onNameChange(e) {
-        this.setState({
-            name: e.target.value
-        })
-    }
-    onPhoneChange(e) {
-        this.setState({
-            phone: e.target.value
-        })
-    }
-    onEmailChange(e) {
-        this.setState({
-            email: e.target.value
-        })
-    }
-    onTownChange(e) {
-        this.setState({
-            town: e.target.value
-        })
-    }
-    onSubmit(e){
-        e.preventDefault();
-        this.props.onAdd(this.state);
-        this.setState({
-            name: '',
-            phone: '',
-            email: '',
-            town: '',
-        })
-    }
-
     render() {
-        const {addClosed, addIsOpened} = this.props;
+        const {
+            addClosed, 
+            addIsOpened,
+            onAdd,
+            values
+                        } = this.props;
         let content = (<EditBg>
             <EditWrap>
                 <EditHeader>
                     <h2>Добавление клиента</h2>
                      <CloseButton onClick={() => addClosed()}>&times;</CloseButton>
                 </EditHeader>
-                <form onSubmit={this.onSubmit}>
+                <Form>
                 <Hfour>Имя:</Hfour>
-                    <EditInput 
-                    placeholder='Введите имя' 
-                    onChange={this.onNameChange}        
-                    value={this.state.name} required/>
+                    <Field type='text' name='name' placeholder='Введите Ваше имя'/>
                 <Hfour>Телефон:</Hfour>
-                    <EditInput 
-                    placeholder='Введите телефон' 
-                    onChange={this.onPhoneChange} 
-                    value={this.state.phone} required/>
+                    <Field type='text' name='phone' placeholder='Введите Ваш телефон'/>
                 <Hfour>E-mail:</Hfour>
-                    <EditInput 
-                    placeholder='Введите e-mail' 
-                    onChange={this.onEmailChange} 
-                    value={this.state.email} required/>
-                <Hfour>Город:</Hfour>
-                    <EditInput 
-                    placeholder='Введите город' 
-                    onChange={this.onTownChange} 
-                    value={this.state.town} required/>
-                <button type="submit">Отправить</button>
-                </form>
+                    <Field type='text' name='email' placeholder='Введите Ваш e-mail'/>
+                <Hfour>Town:</Hfour>
+                    <Field type='text' name='town' placeholder='Введите Ваш город'/>
+                <button type="submit" onClick={() => onAdd(values)}>Отправить</button>
+                </Form>
             </EditWrap>
         </EditBg>
         )
@@ -144,12 +86,23 @@ class AddClient extends Component {
 const mapStateToProps = (state) => {
     return {    
     addIsOpened: state.addIsOpened,
-    clientOnEdit: state.clientOnEdit,
     }
 }
 const mapDispatchToProps = {
     addClosed,
     onAdd,
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(AddClient);
+const formikAddClient = withFormik({
+    mapPropsToValues() {
+        return {
+            name: '',
+            phone: '',
+            email: '',
+            town: '',
+        }
+    },
+    handleSubmit(values) {
+        console.log(values);
+    }
+})(AddClient)
+export default connect(mapStateToProps, mapDispatchToProps)(formikAddClient);
