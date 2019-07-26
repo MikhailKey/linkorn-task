@@ -1,0 +1,5 @@
+.addServiceInfoForm {
+    width: 30%;
+    display: flex;
+    flex-direction: column
+}

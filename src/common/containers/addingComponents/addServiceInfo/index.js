@@ -1,2 +1,2 @@
-import AddServiceInfo from './addServiceInfo';
-export default AddServiceInfo;
+import AddingServiceInfo from './addServiceInfo';
+export default AddingServiceInfo;

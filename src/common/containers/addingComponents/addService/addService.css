@@ -1,4 +1,13 @@
 .addServiceForm {
+width: 30%;
 display: flex;
 flex-direction: column;
+}
+.mainButton {
+    background: tomato;
+    width: 30%;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 15px
 }

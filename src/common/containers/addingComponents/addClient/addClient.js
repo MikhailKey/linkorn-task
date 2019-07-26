@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
 import FormikAddService from '../addService';
-import {addClosed, onAdd, showService} from '../../../../features/ducks';
+import {addClosed, onAdd, showService, hideService} from '../../../../features/ducks';
 import { withFormik, Form, Field } from 'formik';
 import './addClient.css'
 const EditBg = styled.div`
@@ -50,17 +50,25 @@ margin-top: 10px
 class AddClient extends Component {
     render() {
         const {
-            clientServices,
+            clientObjects,
             addClosed, 
             addIsOpened,
             onAdd,
             values,
-            showService
+            showService,
+            hideService,
+            addServiceIsOpened,
                         } = this.props;
-        const servisesType = clientServices.map(service => {if (service=== false) {return `добавьте объект обслуживания`}
+        const servisesType = clientObjects.map(service => {if (service=== false) {return `добавьте объект обслуживания`}
          else {
             return `${service.type}, `
         }})
+        let serviceButton = '';
+        if (!addServiceIsOpened) {
+            serviceButton=(<button onClick={() => showService()}>Добавить объект обслуживания</button>)
+        } else {
+            serviceButton = (<button onClick={() => hideService()}>Скрыть объект обслуживания</button>)
+        }
         let content = (<EditBg>
             <EditWrap>
                 <EditHeader>
@@ -79,7 +87,7 @@ class AddClient extends Component {
                 <button type="submit" onClick={() => onAdd(values)}>Отправить</button>
                 </Form>
                 <p>Объекты обслуживания: {servisesType} </p>
-                <button onClick={() => showService()}>Добавить договор</button>
+                {serviceButton}
                 <FormikAddService/>
             </EditWrap>
         </EditBg>
@@ -97,13 +105,15 @@ class AddClient extends Component {
 const mapStateToProps = (state) => {
     return {    
     addIsOpened: state.addIsOpened,
-    clientServices: state.clientServices,
+    addServiceIsOpened: state.addServiceIsOpened,
+    clientObjects: state.clientObjects,
     }
 }
 const mapDispatchToProps = {
     addClosed,
     onAdd,
     showService,
+    hideService
 }
 const formikAddClient = withFormik({
     mapPropsToValues() {

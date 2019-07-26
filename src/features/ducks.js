@@ -6,9 +6,10 @@ const initialState = {
     editIsOpened: false,
     addIsOpened: false,
     clientOnEdit: [],
-    newClient: [],
+    clientObjects: [],
     clientServices: [],
     addServiceIsOpened: false,
+    addServiceInfoIsOpened: false,
     clientId: 3,
 }
 const reducer = (state = initialState, action) => {
@@ -73,20 +74,26 @@ const reducer = (state = initialState, action) => {
                 clientOnEdit: client,
             }
         case 'ON_ADD':
-            let addedClient = {...action.newClient, id: state.clientId+1, services: state.clientServices}; 
+            let addedClient = {...action.newClient, id: state.clientId+1, services: state.clientObjects}; 
             const newArr = [...state.allClients, addedClient];
             return {
                 ...state,
                 clientId: state.clientId+1,
                 allClients: newArr,
                 addIsOpened: false,
+                clientObjects: [],
             }
-            
         case 'ON_ADD_OBJECT':
-            let newObject = action.newObject;
+            let newObject = {...action.newObject, services: state.clientServices};
             return {
                 ...state,
-                clientServices: [...state.clientServices, newObject]
+                clientObjects: [...state.clientObjects, newObject]
+            }
+        case 'ON_ADD_SERVICE':
+            let newService = action.newService;
+            return {
+                ...state,
+                clientServices:[...state.clientServices, newService]
             }
         case 'SHOW_SERVICE':
             return {
@@ -97,6 +104,16 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 addServiceIsOpened: false,
+            }    
+        case 'SHOW_SERVICE_INFO':
+            return {
+                ...state,
+                addServiceInfoIsOpened: true,
+            }  
+         case 'HIDE_SERVICE_INFO':
+            return {
+                ...state,
+                addServiceInfoIsOpened: false,
             }    
         case 'ON_EDIT':
             let editClient = {...action.editClient, id: action.id}
@@ -140,6 +157,13 @@ const infoTransfered = (client) => {
         client,
     }
 }
+const onAddService = (newService) => {
+    console.log(newService)
+    return {
+        type: 'ON_ADD_SERVICE',
+        newService,
+    }
+}
 const showService = () => {
     return {
         type: 'SHOW_SERVICE'
@@ -148,6 +172,16 @@ const showService = () => {
 const hideService = () => {
     return {
         type: 'HIDE_SERVICE'
+    } 
+}
+const showServiceInfo = () => {
+    return {
+        type: 'SHOW_SERVICE_INFO'
+    } 
+}
+const hideServiceInfo = () => {
+    return {
+        type: 'HIDE_SERVICE_INFO'
     } 
 }
 const editClosed = () => {
@@ -205,6 +239,9 @@ export {
     onEdit,
     showService,
     hideService,
+    showServiceInfo,
+    hideServiceInfo,
+    onAddService,
 }
 
     

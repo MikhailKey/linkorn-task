@@ -1,12 +1,20 @@
 import React, {Component} from 'react';
 import { withFormik, Form, Field } from 'formik';
 import {connect} from 'react-redux';
-import {onAddObject, hideService} from '../../../../features/ducks'
+import AddServiceInfo from '../addServiceInfo';
+import {onAddObject, hideService, showServiceInfo, hideServiceInfo} from '../../../../features/ducks'
 import './addService.css'
 class AddService extends Component {
     render() {
-        const {onAddObject, values, addServiceIsOpened, hideService} = this.props
+        const {showServiceInfo, hideServiceInfo, onAddObject, values, addServiceIsOpened, addServiceInfoIsOpened, hideService} = this.props;
+        let serviceInfoButton = '';
+        if (!addServiceInfoIsOpened) {
+            serviceInfoButton=(<button onClick={() => showServiceInfo()}>Добавить услугу</button>)
+        } else {
+            serviceInfoButton = (<button onClick={() => hideServiceInfo()}>Скрыть услугу</button>)
+        }
         let content = (
+            <>
             <Form className='addServiceForm'>
             <label>Тип объекта:</label>
             <Field component="select" name='type'>
@@ -24,9 +32,12 @@ class AddService extends Component {
             <Field type="text" name='startDate' placeholder='Введите дату подключения'></Field>
             <label>Дата окончания действия:</label>
             <Field type="text" name='finishDate' placeholder='Введите дату окончания действия'></Field>
-            <button type="submit" onClick={() => {onAddObject(values); hideService()}}>Добавить услугу</button>
-            <h4>Дополнительные услуги</h4>
+            <h4>Дополнительные услуги: </h4>
+            {serviceInfoButton}
             </Form>
+            <AddServiceInfo/>
+            <button  className="mainButton" type="submit" onClick={() => {onAddObject(values); hideService()}}>Добавить объект</button>
+           </>
         )
         if (!addServiceIsOpened) {
             content=null;
@@ -56,11 +67,14 @@ const mapStateToProps = (state) => {
     return {    
     addIsOpened: state.addIsOpened,
     addServiceIsOpened: state.addServiceIsOpened,
+    addServiceInfoIsOpened: state.addServiceInfoIsOpened,
     }
 }
 const mapDispatchToProps = {
     onAddObject,
     hideService,
+    showServiceInfo,
+    hideServiceInfo,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormikAddService);
