@@ -61,7 +61,7 @@ class EditClient extends Component  {
         onEdit,
         values
     } = this.props;
-    const {id} = clientOnEdit;
+    const {id, services} = clientOnEdit;
     //const servicesContent = services.map(object => <ObjectsList key={object.contractNumber} servicesData={services}/>)
     let content = (
         <EditBg>
