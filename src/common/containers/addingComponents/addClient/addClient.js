@@ -59,7 +59,7 @@ class AddClient extends Component {
             hideService,
             addServiceIsOpened,
                         } = this.props;
-        const servisesType = clientObjects.map(service => {if (service=== false) {return `добавьте объект обслуживания`}
+        const objectsType = clientObjects.map(service => {if (service=== false) {return `добавьте объект обслуживания`}
          else {
             return `${service.type}, `
         }})
@@ -86,7 +86,7 @@ class AddClient extends Component {
                     <Field className="editInput" type='text' name='town' placeholder='Введите Ваш город'/>
                 <button type="submit" onClick={() => onAdd(values)}>Отправить</button>
                 </Form>
-                <p>Объекты обслуживания: {servisesType} </p>
+                <p>Объекты обслуживания: {objectsType} </p>
                 {serviceButton}
                 <FormikAddService/>
             </EditWrap>

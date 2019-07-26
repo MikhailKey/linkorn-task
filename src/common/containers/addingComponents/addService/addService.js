@@ -2,11 +2,23 @@ import React, {Component} from 'react';
 import { withFormik, Form, Field } from 'formik';
 import {connect} from 'react-redux';
 import AddServiceInfo from '../addServiceInfo';
-import {onAddObject, hideService, showServiceInfo, hideServiceInfo} from '../../../../features/ducks'
+import {onAddObject, hideService, showServiceInfo, hideServiceInfo, onTypeSelected} from '../../../../features/ducks'
 import './addService.css'
 class AddService extends Component {
     render() {
-        const {showServiceInfo, hideServiceInfo, onAddObject, values, addServiceIsOpened, addServiceInfoIsOpened, hideService} = this.props;
+        const {showServiceInfo, 
+            hideServiceInfo, 
+            onAddObject, 
+            values, 
+            addServiceIsOpened, 
+            addServiceInfoIsOpened, 
+            clientServices,
+            onTypeSelected,
+            hideService} = this.props;
+            const servicesType = clientServices.map(service => {if (service === false) {return `добавьте объект обслуживания`}
+            else {
+               return `${service.name}, `
+           }})
         let serviceInfoButton = '';
         if (!addServiceInfoIsOpened) {
             serviceInfoButton=(<button onClick={() => showServiceInfo()}>Добавить услугу</button>)
@@ -17,7 +29,7 @@ class AddService extends Component {
             <>
             <Form className='addServiceForm'>
             <label>Тип объекта:</label>
-            <Field component="select" name='type'>
+            <Field component="select" name='type' onClick={() => onTypeSelected(values.type)}>
                 <option value='авто'>авто</option>
                 <option value='недвижимость'>недвижимость</option>
             </Field>
@@ -32,7 +44,7 @@ class AddService extends Component {
             <Field type="text" name='startDate' placeholder='Введите дату подключения'></Field>
             <label>Дата окончания действия:</label>
             <Field type="text" name='finishDate' placeholder='Введите дату окончания действия'></Field>
-            <h4>Дополнительные услуги: </h4>
+            <h4>Дополнительные услуги: {servicesType}</h4>
             {serviceInfoButton}
             </Form>
             <AddServiceInfo/>
@@ -68,10 +80,12 @@ const mapStateToProps = (state) => {
     addIsOpened: state.addIsOpened,
     addServiceIsOpened: state.addServiceIsOpened,
     addServiceInfoIsOpened: state.addServiceInfoIsOpened,
+    clientServices: state.clientServices,
     }
 }
 const mapDispatchToProps = {
     onAddObject,
+    onTypeSelected,
     hideService,
     showServiceInfo,
     hideServiceInfo,

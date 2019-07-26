@@ -11,6 +11,7 @@ const initialState = {
     addServiceIsOpened: false,
     addServiceInfoIsOpened: false,
     clientId: 3,
+    typeOfObject: 'авто',
 }
 const reducer = (state = initialState, action) => {
     switch(action.type) {
@@ -89,6 +90,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 clientObjects: [...state.clientObjects, newObject]
             }
+        case 'ON_TYPE_SELECTED':
+            return {
+                ...state,
+                typeOfObject: action.objectType,
+            }
         case 'ON_ADD_SERVICE':
             let newService = action.newService;
             return {
@@ -138,6 +144,12 @@ return {
     id,
     editClient,
 }
+}
+const onTypeSelected = (objectType) => {
+    return {
+        type: 'ON_TYPE_SELECTED',
+        objectType,
+    }
 }
 const onAdd = (newClient) => {
     return {
@@ -242,6 +254,7 @@ export {
     showServiceInfo,
     hideServiceInfo,
     onAddService,
+    onTypeSelected,
 }
 
     
