@@ -1,0 +1,4 @@
+.addServiceForm {
+display: flex;
+flex-direction: column;
+}

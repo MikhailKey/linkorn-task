@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
-import {addClosed, onAdd} from '../../../features/ducks';
+import FormikAddService from '../addService';
+import {addClosed, onAdd, showService} from '../../../../features/ducks';
 import { withFormik, Form, Field } from 'formik';
 import './addClient.css'
 const EditBg = styled.div`
@@ -49,11 +50,17 @@ margin-top: 10px
 class AddClient extends Component {
     render() {
         const {
+            clientServices,
             addClosed, 
             addIsOpened,
             onAdd,
-            values
+            values,
+            showService
                         } = this.props;
+        const servisesType = clientServices.map(service => {if (service=== false) {return `добавьте объект обслуживания`}
+         else {
+            return `${service.type}, `
+        }})
         let content = (<EditBg>
             <EditWrap>
                 <EditHeader>
@@ -71,6 +78,9 @@ class AddClient extends Component {
                     <Field className="editInput" type='text' name='town' placeholder='Введите Ваш город'/>
                 <button type="submit" onClick={() => onAdd(values)}>Отправить</button>
                 </Form>
+                <p>Объекты обслуживания: {servisesType} </p>
+                <button onClick={() => showService()}>Добавить договор</button>
+                <FormikAddService/>
             </EditWrap>
         </EditBg>
         )
@@ -87,11 +97,13 @@ class AddClient extends Component {
 const mapStateToProps = (state) => {
     return {    
     addIsOpened: state.addIsOpened,
+    clientServices: state.clientServices,
     }
 }
 const mapDispatchToProps = {
     addClosed,
     onAdd,
+    showService,
 }
 const formikAddClient = withFormik({
     mapPropsToValues() {

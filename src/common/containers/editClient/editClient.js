@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import styled from 'styled-components';
 import {connect} from 'react-redux';
-import ObjectsList from '../objectsList';
+//import ObjectsList from '../objectsList';
 import {editClosed, onEdit} from '../../../features/ducks';
 import { withFormik, Form, Field } from 'formik';
 const EditBg = styled.div`
@@ -61,7 +61,7 @@ class EditClient extends Component  {
         onEdit,
         values
     } = this.props;
-    const {id, services} = clientOnEdit;
+    const {id} = clientOnEdit;
     //const servicesContent = services.map(object => <ObjectsList key={object.contractNumber} servicesData={services}/>)
     let content = (
         <EditBg>

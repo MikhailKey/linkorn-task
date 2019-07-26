@@ -13,11 +13,11 @@
                   "status":"действует",
                   "startDate":"24.01.05",
                   "finishDate":"24.01.25",
-                  "services":{
+                  "services":[{
                     "name":"отслеживание автомобиля",
                     "startDate":"24.01.06",
                     "activity":"услуга выключена"
-                  }
+                  }]
                 },
                 {
                   "type":"недвижимость",
@@ -25,11 +25,11 @@
                   "status":"действует",
                   "startDate":"24.07.05",
                   "finishDate":"24.05.19",
-                  "services":{
+                  "services":[{
                     "name":"видеонаблюдение",
                     "startDate":"09.11.17",
                     "activity":"услуга включена"
-                  }
+                  }]
                 }
               ]
             },
@@ -46,11 +46,11 @@
                   "status":"действует",
                   "startDate":"11.06.15",
                   "finishDate":"11.06.25",
-                  "services":{
+                  "services":[{
                     "name":"сигнализация",
                     "startDate":"11.06.15",
                     "activity":"услуга включена"
-                  }
+                  }]
                 },
                 {
                   "type":"недвижимость",
@@ -58,11 +58,11 @@
                   "status":"действует",
                   "startDate":"01.07.13",
                   "finishDate":"01.07.23",
-                  "services":{
+                  "services":[{
                     "name":"датчик дыма",
                     "startDate":"11.06.13",
                     "activity":"услуга включена"
-                  }
+                  }]
                 }
               ]
             },
@@ -79,11 +79,11 @@
                   "status":"не действует",
                   "startDate":"11.12.12",
                   "finishDate":"11.06.18",
-                  "services":{
+                  "services":[{
                     "name":"датчик объема топливного бака",
                     "startDate":"11.12.12",
                     "activity":"услуга отключена"
-                  }
+                  }]
                 },
                 {
                   "type":"недвижимость",
@@ -91,11 +91,11 @@
                   "status":"действует",
                   "startDate":"03.11.19",
                   "finishDate":"03.11.29",
-                  "services":{
+                  "services":[{
                     "name":"охрана",
                     "startDate":"03.11.19",
                     "activity":"услуга включена"
-                  }
+                  }]
                 }
               ]
             }

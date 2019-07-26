@@ -7,6 +7,8 @@ const initialState = {
     addIsOpened: false,
     clientOnEdit: [],
     newClient: [],
+    clientServices: [],
+    addServiceIsOpened: false,
     clientId: 3,
 }
 const reducer = (state = initialState, action) => {
@@ -27,12 +29,6 @@ const reducer = (state = initialState, action) => {
         case 'CLIENTS_FILTERED':
            
             const searchValue = action.payload;
-            /*let items={};
-            for (let i=0; i<state.allClients.length; i++) {
-                if (state.allClients[i].toLowerCase().includes(searchValue.toLowerCase())) {
-                    return items+=state.allClients[i];
-                }
-            }*/
             let items = state.allClients.filter((item) => {
                 if (item.name.toLowerCase().includes(searchValue.toLowerCase())) {
                     return item;
@@ -45,13 +41,6 @@ const reducer = (state = initialState, action) => {
                 } else return null;
                 
             });
-            /*let items = state.allClients.filter(item => {
-                for (let key in item) {
-                    if (item[key].includes(searchValue)) {
-                        return item[key].includes(searchValue)
-                    } 
-                }
-            })*/
             return {
                 ...state,
                 filteredClients: items,
@@ -77,20 +66,38 @@ const reducer = (state = initialState, action) => {
                 addIsOpened: false
             }
         case 'INFO_TRANSFERED':
+            console.log(state.allClients);
             let client = action.client;
             return {
                 ...state,
                 clientOnEdit: client,
             }
         case 'ON_ADD':
-               let newClient = {...action.newClient, id: state.clientId+1};
-            const newArr = [...state.allClients, newClient];
+            let addedClient = {...action.newClient, id: state.clientId+1, services: state.clientServices}; 
+            const newArr = [...state.allClients, addedClient];
             return {
                 ...state,
                 clientId: state.clientId+1,
                 allClients: newArr,
                 addIsOpened: false,
             }
+            
+        case 'ON_ADD_OBJECT':
+            let newObject = action.newObject;
+            return {
+                ...state,
+                clientServices: [...state.clientServices, newObject]
+            }
+        case 'SHOW_SERVICE':
+            return {
+                ...state,
+                addServiceIsOpened: true,
+            }  
+         case 'HIDE_SERVICE':
+            return {
+                ...state,
+                addServiceIsOpened: false,
+            }    
         case 'ON_EDIT':
             let editClient = {...action.editClient, id: action.id}
             const clientIndex = state.allClients.findIndex(item => item.id === editClient.id);
@@ -121,11 +128,27 @@ const onAdd = (newClient) => {
         newClient,
     }
 }
+const onAddObject = (newObject) => {
+    return {
+        type: 'ON_ADD_OBJECT',
+        newObject,
+    }
+}
 const infoTransfered = (client) => {
     return {
         type: 'INFO_TRANSFERED',
         client,
     }
+}
+const showService = () => {
+    return {
+        type: 'SHOW_SERVICE'
+    } 
+}
+const hideService = () => {
+    return {
+        type: 'HIDE_SERVICE'
+    } 
 }
 const editClosed = () => {
     return {
@@ -178,7 +201,10 @@ export {
     addOpened,
     infoTransfered,
     onAdd,
-    onEdit
+    onAddObject,
+    onEdit,
+    showService,
+    hideService,
 }
 
     

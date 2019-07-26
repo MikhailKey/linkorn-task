@@ -4,7 +4,7 @@ import './app.css'
 import SearchPanel from '../common/containers/searchPanel';
 import MainContainer from '../common/containers/mainContainer';
 import EditClient from '../common/containers/editClient';
-import AddClient from '../common/containers/addClient';
+import AddClient from '../common/containers/addingComponents/addClient';
 const Container = styled.div `
 width: 1170px;
 margin: auto;
