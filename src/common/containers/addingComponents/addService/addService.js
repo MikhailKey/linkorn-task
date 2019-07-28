@@ -1,9 +1,17 @@
 import React, {Component} from 'react';
 import { withFormik, Form, Field } from 'formik';
 import {connect} from 'react-redux';
-import AddServiceInfo from '../addServiceInfo';
+import styled from 'styled-components';
 import {onAddObject, hideService, showServiceInfo, hideServiceInfo, onTypeSelected} from '../../../../features/ducks'
 import './addService.css'
+const ServicesButton = styled.button`
+background: none;
+border: 1px solid blue;
+padding: 5px 10px;
+border-radius: 2px;
+cursor: pointer;
+width: 50%
+`
 class AddService extends Component {
     render() {
         const {showServiceInfo, 
@@ -21,35 +29,35 @@ class AddService extends Component {
            }})
         let serviceInfoButton = '';
         if (!addServiceInfoIsOpened) {
-            serviceInfoButton=(<button onClick={() => showServiceInfo()}>Добавить услугу</button>)
+            serviceInfoButton=(<ServicesButton onClick={() => showServiceInfo()}>Добавить услугу</ServicesButton>)
         } else {
-            serviceInfoButton = (<button onClick={() => hideServiceInfo()}>Скрыть услугу</button>)
+            serviceInfoButton = (<ServicesButton onClick={() => hideServiceInfo()}>Скрыть услугу</ServicesButton>)
         }
         let content = (
             <>
             <Form className='addServiceForm'>
             <label>Тип объекта:</label>
-            <Field component="select" name='type' onClick={() => onTypeSelected(values.type)}>
+            <Field className="editInputService" component="select" name='type' onClick={() => onTypeSelected(values.type)}>
                 <option value='авто'>авто</option>
                 <option value='недвижимость'>недвижимость</option>
             </Field>
             <label>№ договора: </label>
-            <Field type="text" name='contractNumber'></Field>
+            <Field className="editInputService" type="text" name='contractNumber'></Field>
             <label>Статус объекта: </label>
-            <Field component="select" name='status '>
+            <Field className="editInputService" component="select" name='status '>
                 <option value='действует'>действует</option>
                 <option value='не действует'>не действует</option>
             </Field>
             <label>Дата подключения:</label>
-            <Field type="text" name='startDate' placeholder='Введите дату подключения'></Field>
+            <Field className="editInputService" type="text" name='startDate' placeholder='Введите дату подключения'></Field>
             <label>Дата окончания действия:</label>
-            <Field type="text" name='finishDate' placeholder='Введите дату окончания действия'></Field>
+            <Field className="editInputService" type="text" name='finishDate' placeholder='Введите дату окончания действия'></Field>
             <h4>Дополнительные услуги: {servicesType}</h4>
             {serviceInfoButton}
-            </Form>
-            <AddServiceInfo/>
             <button  className="mainButton" type="submit" onClick={() => {onAddObject(values); hideService()}}>Добавить объект</button>
-           </>
+            </Form>
+            
+            </>
         )
         if (!addServiceIsOpened) {
             content=null;

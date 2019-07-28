@@ -48,6 +48,7 @@ const reducer = (state = initialState, action) => {
                 filteredClients: items,
             }
         case 'EDIT_OPENED':
+            console.log(state.clientOnEdit);
             return {
                 ...state,
                 editIsOpened: true
@@ -68,7 +69,6 @@ const reducer = (state = initialState, action) => {
                 addIsOpened: false
             }
         case 'INFO_TRANSFERED':
-            console.log(state.allClients);
             let client = action.client;
             return {
                 ...state,

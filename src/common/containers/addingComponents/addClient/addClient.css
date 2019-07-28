@@ -5,3 +5,7 @@
     border: 1px solid #6dd5ed;
     border-radius: 3px;
 }
+.flex-service {
+    display: flex;
+    justify-content: space-between
+}

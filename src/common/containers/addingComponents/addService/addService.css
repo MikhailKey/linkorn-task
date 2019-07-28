@@ -1,5 +1,5 @@
 .addServiceForm {
-width: 30%;
+width: 60%;
 display: flex;
 flex-direction: column;
 }
@@ -10,4 +10,12 @@ flex-direction: column;
     border: none;
     padding: 5px;
     border-radius: 15px
+}
+.editInputService {
+    width: 70%;
+    height: 30px;
+    padding-left: 10px;
+    border: 1px solid #6dd5ed;
+    border-radius: 3px;
+    margin-bottom: 5px;
 }

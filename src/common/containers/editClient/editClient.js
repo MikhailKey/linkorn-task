@@ -7,7 +7,6 @@ import { withFormik, Form, Field } from 'formik';
 const EditBg = styled.div`
 z-index: 99
 width: 100%;
-height: 2000px;
 overflow: hidden;
 position: fixed;
 background: rgba(0, 0, 0, 0.5);
@@ -51,7 +50,13 @@ display: flex
 flex-direction: column
 width: 10%
 `  
-
+const AddButton = styled.button`
+background: #32bf84;
+color: white;
+border: none;
+padding: 5px 10px
+border-radius: 2px
+`
 class EditClient extends Component  {
     render() {
     const {
@@ -80,7 +85,7 @@ class EditClient extends Component  {
                 <Hfour>Город:</Hfour>
                     <Field className="editInput" type='text' name='town'/>   
                 <BtnWrap>
-                <button type="submit" onClick={() => onEdit(id, values)}>Сохранить</button>
+                <AddButton type="submit" onClick={() => onEdit(id, values)}>Сохранить</AddButton>
                 <button onClick={() => editClosed()}>Закрыть</button>
                 </BtnWrap>
                 

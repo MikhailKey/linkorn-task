@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import FormikAddService from '../addService';
 import {addClosed, onAdd, showService, hideService} from '../../../../features/ducks';
 import { withFormik, Form, Field } from 'formik';
+
+import AddServiceInfo from '../addServiceInfo';
 import './addClient.css'
 const EditBg = styled.div`
 z-index: 99
@@ -13,6 +15,21 @@ overflow: hidden;
 position: fixed;
 background: rgba(0, 0, 0, 0.5);
 
+`
+const AddButton = styled.button`
+background: #32bf84;
+color: white;
+border: none;
+padding: 5px 10px;
+border-radius: 2px;
+cursor: pointer;
+`
+const ServicesButton = styled.button`
+background: none;
+border: 1px solid blue;
+padding: 5px 10px;
+border-radius: 2px;
+cursor: pointer;
 `
 const EditHeader = styled.div`
 display: flex;
@@ -65,9 +82,9 @@ class AddClient extends Component {
         }})
         let serviceButton = '';
         if (!addServiceIsOpened) {
-            serviceButton=(<button onClick={() => showService()}>Добавить объект обслуживания</button>)
+            serviceButton=(<ServicesButton onClick={() => showService()}>Добавить объект обслуживания</ServicesButton>)
         } else {
-            serviceButton = (<button onClick={() => hideService()}>Скрыть объект обслуживания</button>)
+            serviceButton = (<ServicesButton onClick={() => hideService()}>Скрыть объект обслуживания</ServicesButton>)
         }
         let content = (<EditBg>
             <EditWrap>
@@ -84,11 +101,14 @@ class AddClient extends Component {
                     <Field className="editInput" type='text' name='email' placeholder='Введите Ваш e-mail'/>
                 <Hfour>Town:</Hfour>
                     <Field className="editInput" type='text' name='town' placeholder='Введите Ваш город'/>
-                <button type="submit" onClick={() => onAdd(values)}>Отправить</button>
+                <AddButton type="submit" onClick={() => onAdd(values)}>Отправить</AddButton>
                 </Form>
                 <p>Объекты обслуживания: {objectsType} </p>
                 {serviceButton}
+                <div className="flex-service">
                 <FormikAddService/>
+                <AddServiceInfo/>
+                </div>
             </EditWrap>
         </EditBg>
         )
