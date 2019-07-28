@@ -29,9 +29,9 @@ class AddService extends Component {
            }})
         let serviceInfoButton = '';
         if (!addServiceInfoIsOpened) {
-            serviceInfoButton=(<ServicesButton onClick={() => showServiceInfo()}>Добавить услугу</ServicesButton>)
+            serviceInfoButton=(<ServicesButton type="button" onClick={() => showServiceInfo()}>Добавить услугу</ServicesButton>)
         } else {
-            serviceInfoButton = (<ServicesButton onClick={() => hideServiceInfo()}>Скрыть услугу</ServicesButton>)
+            serviceInfoButton = (<ServicesButton type="button" onClick={() => hideServiceInfo()}>Скрыть услугу</ServicesButton>)
         }
         let content = (
             <>
