@@ -54,6 +54,7 @@ const reducer = (state = initialState, action) => {
                 editIsOpened: true
             };
         case 'EDIT_CLOSED':
+        console.log(state.clientOnEdit);
             return {
                 ...state,
                 editIsOpened: false

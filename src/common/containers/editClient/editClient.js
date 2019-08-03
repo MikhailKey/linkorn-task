@@ -66,8 +66,8 @@ class EditClient extends Component  {
         onEdit,
         values
     } = this.props;
-    const {id, services} = clientOnEdit;
-    //const servicesContent = services.map(object => <ObjectsList key={object.contractNumber} servicesData={services}/>)
+    const {id, services = 0} = clientOnEdit;
+    //let servicesContent = services.map(object => <ObjectsList key={object.contractNumber} servicesData={services}/>)
     let content = (
         <EditBg>
             <EditWrap>
@@ -88,9 +88,7 @@ class EditClient extends Component  {
                 <AddButton type="submit" onClick={() => onEdit(id, values)}>Сохранить</AddButton>
                 <button onClick={() => editClosed()}>Закрыть</button>
                 </BtnWrap>
-                
                 </Form>
-                
             </EditWrap>
         </EditBg>
     )
